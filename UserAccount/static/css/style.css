@@ -1,0 +1,21 @@
+.container_ctr {
+    text-align: center;
+    padding: 10% 20%;
+}
+
+#authorized_container {
+    text-align: center;
+}
+
+.nameDiv {
+    display: inline-block;
+    width: 24%;
+}
+
+.nameInput {
+    width: 70%;
+}
+
+.input_ctr {
+    text-align: center;
+}

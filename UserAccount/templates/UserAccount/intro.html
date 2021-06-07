@@ -1,0 +1,28 @@
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static './css/intro.css' %}">
+    <title>The Signature - Welcome</title>
+</head>
+<body>
+    <header>
+        <br>
+        <div class="logo">
+            The Signature
+        </div><br>
+    </header>
+
+        <div class = "board">
+            <div class="descrip">
+                당신만의 특별한 서명은,<br>the Signature와 함께
+            </div>
+            <a class="btn" href="{% url 'home' %}">Go!</a>
+        </div>
+</body>
+</html>
+
+{% endblock %}

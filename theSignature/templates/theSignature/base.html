@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="{% static './css/base.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static './js/base.js' %}" type="text/javascript"></script>
+
+    <title> {% block title %}{% endblock %} </title>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">The Signature</div>
+        </header>
+    </div>
+    <div class="navbar">
+        <nav id="navId">
+            <!-- <a class="nav-link" href="">Home</a> -->
+            <a class="nav-link" href="{% url 'home' %}">나만의 서명 제작하기</a>
+            <a class="nav-link" href="{% url 'drawing' %}">서명 연습하기</a>
+            <a class="nav-link" href="{% url 'watermark' %}">워터마크 적용하기</a>
+        </nav>
+    </div>
+<div class="customer" >
+        <div class="cross" onclick="showBtns()">
+            <i></i>
+        </div>
+        <div class="customer-btn">
+            {% csrf_token %}
+            <div class="customer-compo welcome">
+                Welcome {{ request.session.user_name }} 님
+            </div>
+            <div id="btns" class="btns" style="display: none;">
+                <a class="customer-compo btn" id="edit-info" href="{% url 'modify_data' %}">내 정보 수정하기</a><br/><br/><br/>
+                <a class="customer-compo btn" id="edit-sign" href="{% url 'saved_signs' %}">저장된 서명 확인하기</a><br/><br/><br/>
+                <a class="customer-compo btn" id="logout" href="{% url 'logout_action' %}">로그아웃</a>
+            </div>
+        </div>
+    </div>
+<!--    <div class="toTop" onclick="goTop()">-->
+<!--        <a class="arrow" href="">-->
+<!--            <span></span>-->
+<!--        </a>-->
+<!--    </div>-->
+<div>
+{% block content %}
+
+{% endblock %}
+
+</div>
+</body>
+</html>

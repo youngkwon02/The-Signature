@@ -1,0 +1,39 @@
+{% extends "UserAccount/base.html" %}
+
+{% block content %}
+<div class="container_ctr">
+    <h2>회원 가입</h2>
+    <span style="color: red; font-weight: bold;">{{ request.session.err_message }}</span>
+    <hr>
+    <form method="POST" action="{%url 'signup_action'%}">
+        {% csrf_token %}
+        <label for="user_email">User Email</label><br>
+        <input name="user_email" type="email" style="width: 41%;" class="input_ctr"><br><br>
+        <div>
+            <div class="nameDiv">
+                <label for="first_name_kr">First Name (KR)</label><br>
+                <input name="first_name_kr" type="text" class="nameInput input_ctr"><br><br>
+            </div>
+            <div class="nameDiv">
+                <label for="last_name_kr">Last Name (KR)</label><br>
+                <input name="last_name_kr" type="text" class="nameInput input_ctr"><br><br>
+            </div>
+        </div>
+        <div>
+            <div class="nameDiv">
+                <label for="first_name_en">First Name (EN)</label><br>
+                <input name="first_name_en" type="text" class="nameInput input_ctr"><br><br>
+            </div>
+            <div class="nameDiv">
+                <label for="last_name_en">Last Name (EN)</label><br>
+                <input name="last_name_en" type="text" class="nameInput input_ctr"><br><br>
+            </div>
+        </div>
+        <label for="password">Password</label><br>
+        <input name="user_passwd" type="password"><br><br>
+        <label for="password_check">Password check</label><br>
+        <input name="user_passwd_check" type="password"><br><br>
+        <input type="submit" class="btn btn-primary" value="가입하기">
+    </form>
+</div>
+{% endblock %}

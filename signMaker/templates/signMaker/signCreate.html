@@ -1,0 +1,532 @@
+{% extends 'theSignature/base.html' %}
+{% block title%} :: 나만의 서명 제작하기 :: {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+.selected-info {
+    background-color: #f1efef;
+    margin-left: 550px;
+    padding: 20px;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 5px 2px 10px rgb(216, 216, 216);
+}
+
+.board {
+    font-size: 20px;
+    background-color: #f1efef;
+    font-weight: bold;
+}
+
+.actionBtn {
+    text-align: center;
+}
+
+
+
+.signatures {
+    margin-left: 80px;
+}
+
+.sign {
+    float: left;
+    margin: 30px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: #f1efef;
+    width: 350px;
+    height: 250px;
+    box-shadow: 5px 2px 10px rgb(216, 216, 216);
+}
+
+.downloadBtn {
+    margin-left: 120px;
+    font-size: 14px;
+}
+
+.downloadBtn:hover {
+    background-color: #5c574d;
+    color: rgb(189, 183, 179);
+}
+
+img {
+    margin: 20px;
+}
+
+table,
+td,
+th {
+    background-color: #f1efef;
+}
+
+th {
+    text-align: left;
+}
+
+td {
+    text-align: center;
+}
+
+a {
+    text-decoration: none
+}
+
+table {
+    margin: auto;
+}
+
+@keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-moz-keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-webkit-keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-o-keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+.loading-container,
+.loading,
+#loading-text {
+    left: 200px;
+    height: 160px;
+    position: relative;
+    /* top: 130px; */
+    width: 160px;
+    border-radius: 100%;
+}
+
+.loading-container {
+    margin: 40px auto
+}
+
+.loading {
+    border: 4px solid transparent;
+    border-color: transparent rgb(180, 149, 149) transparent rgb(180, 149, 149);
+    -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -o-transform-origin: 50% 50%;
+    -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -webkit-transform-origin: 50% 50%;
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+    transform-origin: 50% 50%;
+}
+
+.loading-container:hover .loading {
+    border-color: transparent #463e3d transparent #463e3d;
+}
+
+.loading-container:hover .loading,
+.loading-container .loading {
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+#loading-text {
+    -moz-animation: loading-text-opacity 2s linear 0s infinite normal;
+    -o-animation: loading-text-opacity 2s linear 0s infinite normal;
+    -webkit-animation: loading-text-opacity 2s linear 0s infinite normal;
+    animation: loading-text-opacity 2s linear 0s infinite normal;
+    color: #8a4e4e;
+    font-family: "Helvetica Neue", "Helvetica", "arial";
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 45px;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    /* left: 100px; */
+    /* top: 0; */
+    /* top: 155px; */
+    width: 160px;
+}
+
+
+@media (max-width: 1300px) {
+    .selected-info {
+        margin-left: 530px;
+    }
+}
+
+@media (max-width: 1120px) {
+    .selected-info {
+        margin-left: 380px;
+    }
+}
+
+@media (max-width: 900px) {
+    .selected-info {
+        margin-left: 350px;
+    }
+}
+
+@media (max-width: 855px) {
+    .selected-info {
+        margin-left: 280px;
+    }
+    .signatures {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ipad */
+    .selected-info {
+        margin-left: 180px;
+    }
+    .signatures {
+        margin-left: 140px;
+    }
+}
+
+@media (max-width: 740px) {
+    .selected-info {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 639px) {
+    .selected-info {
+        margin-left: 170px;
+    }
+    .signatures {
+        margin-left: 30px;
+    }
+}
+
+@media (max-width: 590px) {
+    .selected-info {
+        margin-left: 130px;
+    }
+}
+</style>
+
+<script>
+
+    function is_storable() {
+        let returnValue = false; //이미 존재하면 false를 리턴.
+        $.ajax({
+            url: 'is_storable/',
+            type: 'GET',
+            async: false,
+            data: {},
+            success: function(data) {
+                if(data === 'True') {
+                    returnValue = true;
+                } else {
+                    returnValue = false;
+                }
+            }
+        })
+        return returnValue;
+    }
+
+    function store_action(file_name) {
+        $.ajax({
+            url: 'preserveResultAction/',
+            type: 'GET',
+            async: false,
+            data: {'file_name': file_name},
+            success: function(data) {
+            }
+        })
+    }
+
+    function disableDownload() {
+
+        var btn1 = document.getElementById('downloadImg1');
+        var btn2 = document.getElementById('downloadImg2');
+        var btn3 = document.getElementById('downloadImg3');
+
+        if(is_storable() == false){
+
+            btn1.setAttribute('href', '');
+            btn2.setAttribute('href', '');
+            btn3.setAttribute('href', '');
+
+            btn1.removeAttribute('download');
+            btn2.removeAttribute('download');
+            btn3.removeAttribute('download');
+
+            alert('다운로드 가능 횟수(5회)를 초과하였습니다.');
+        }
+    }
+
+
+    function preserveResult(file_name) {
+        let storable = is_storable();
+        console.log(storable);
+        store_action(file_name);    
+    }
+
+    function makeSign() {
+        var makeSign = document.getElementsByClassName('signatures');
+        for (var i = 0; i < makeSign.length; i += 1) {
+            makeSign[i].style.display = 'none';
+
+        }
+        document.getElementById('loading-screen').style.setProperty('display', 'inline');
+    }
+</script>
+
+<div class="pageName">
+            서명 만들기 >>
+        </div><br/><br/><br/><br/><br/><br/>
+
+        <div class=" showSign">
+
+            <div class="selected-info">
+                <table>
+                    <tr class="name">
+                        <th>이름</th>
+                        <td>{{ name }}</td>
+                    </tr>
+                    <tr class="style">
+                        <th>스타일</th>
+                        <td>{{ option }}</td>
+                    </tr>
+                    <tr class="letter">
+                        <th>강조 여부</th>
+                        <td>{{ isCap }}</td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr class="btns">
+                        <td>
+                            <a href=".." style="text-decoration: none;">
+                                <div class="btn actionBtn" style="background-color: #a39a86; color: rgb(243, 236, 231); width:70px;">
+                                    조건 재선택
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <div class="btn actionBtn" onclick="window.location.reload()" style="cursor: pointer; background-color: #a39a86; color: rgb(243, 236, 231); width:60px;" onclick="makeSign()">새로고침</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+
+        </div>
+        <br/><br/><br/><br/>
+        <div class="signatures">
+            <div class="sign">
+                <img src="{% static 'ml_result/'%}{{ email }}/handwriting_name01.png" alt="handwriting_name01.png" loading="lazy" width="300px" style="height: 150px;">
+                <a id='downloadImg1' href="{% static 'ml_result/'%}{{ email }}/handwriting_name01.png" download="signature" onclick="disableDownload()">
+                    <div class="btn downloadBtn" onclick="preserveResult('handwriting_name01.png')" style="background-color: #a39a86; color: rgb(243, 236, 231); width:90px;">다운로드</div>
+                </a>
+            </div>
+            <div class="sign">
+                <img src="{% static 'ml_result/'%}{{ email }}/handwriting_name02.png" alt="handwriting_name02.png" loading="lazy" width="300px" style="height: 150px;">
+                <a id='downloadImg2' href="{% static 'ml_result/'%}{{ email }}/handwriting_name02.png" download="signature" onclick="disableDownload()">
+                    <div class="btn downloadBtn" onclick="preserveResult('handwriting_name02.png')" style="background-color: #a39a86; color: rgb(243, 236, 231); width:90px;">다운로드</div>
+                </a>
+            </div>
+            <div class="sign">
+                <img src="{% static 'ml_result/'%}{{ email }}/handwriting_name03.png" alt="handwriting_name03.png" loading="lazy" width="300px" style="height: 150px;">
+                <a id='downloadImg3' href="{% static 'ml_result/'%}{{ email }}/handwriting_name03.png" download="signature" onclick="disableDownload()">
+                    <div class="btn downloadBtn" onclick="preserveResult('handwriting_name03.png')" style="background-color: #a39a86; color: rgb(243, 236, 231); width:90px;">다운로드</div>
+                </a>
+            </div>
+        </div>
+        <div class="loading-container " id='loading-screen' style="display: none; ">
+            <div class="loading "></div>
+        </div>
+
+
+{% endblock %}

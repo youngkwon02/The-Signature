@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
+
+body {
+  background-color: rgb(255, 250, 246);
+  height: 100%;
+}
+header {
+  padding: 70px;
+  text-align: center;
+  color: black;
+  font-family: cursive;
+  /*font-size: 8vw;*/
+  font-size: 70px;
+}
+
+.login {
+  /* text-align: center;
+    font-size: 3vw; */
+  max-width: 50%;
+  /* max-height: 50%; */
+  /* border-style: dotted; */
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  padding: 5px;
+  /* padding: 10% 10% 10% 10%; */
+  margin: 2px auto;
+  box-shadow: 5px 2px 10px #aaa;
+  font-family: "Noto Serif KR", serif;
+  text-align: center;
+}
+.pageName {
+  /* text-align: center; */
+  /*font-size: 2.2vw;*/
+  font-size: 20px;
+  padding: 30px;
+  font-weight: bold;
+}
+
+.pageDes,{
+  font-size: 15px;
+
+  /*font-size: 1.6vw;*/
+  /* padding: 30px; */
+  /* font-weight: bold; */
+}
+
+.description {
+ font-size: 15px;
+ color:#f8756c;
+}
+
+.loginField {
+  /* padding: 5px; */
+  padding-left: 30px;
+  /* text-align: center; */
+}
+
+label {
+  font-size: 12px;
+}
+
+input[type="email"],
+input[type="password"] {
+  /* width: 100%; */
+  padding: 5px;
+  border: 1px solid rgb(63, 42, 3);
+  border-radius: 4px;
+  resize: vertical;
+  background-color: rgb(243, 236, 231);
+  font-family: "Noto Serif KR", serif;
+  /*font-size: 1.3vw;*/
+  font-size: 10px;
+  width: 40%;
+}
+
+input[type="submit"] {
+  background-color: #69665e;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: center;
+  margin: 25px auto;
+  /*font-size: 1.5vw;*/
+  font-size: 7px;
+  font-family: "Noto Serif KR", serif;
+}
+
+#signup_btn {
+  background-color: #69665e;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: center;
+  margin: 25px auto;
+  /*font-size: 1.5vw;*/
+    font-size: 7px;
+  font-family: "Noto Serif KR", serif;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  text-align: center;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  text-align: center;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+}
+
+
+@media (max-width: 1280px) {
+  .logo {
+    font-size: 70px;
+  }
+  .pageName {
+    font-size: 20px;
+  }
+  .pageDes,.description {
+    font-size: 15px;
+  }
+  label {
+    font-size: 12px;
+  }
+  input[type="email"],
+input[type="password"] {
+    font-size: 10px;
+    }
+   input[type="submit"],#signup_btn {
+       font-size: 10px;
+   }
+}
+@media (max-width: 1000px) {
+  .logo {
+    font-size: 65px;
+  }
+  .login {
+    max-width: 70%;
+    }
+  .pageName {
+    font-size: 18px;
+  }
+  .pageDes,.description {
+    font-size: 13px;
+  }
+  label {
+    font-size: 9px;
+  }
+  input[type="email"],
+input[type="password"] {
+    font-size: 7px;
+    }
+   input[type="submit"],#signup_btn {
+       font-size: 7px;
+   }
+}
+@media (max-width: 767px) {
+  .logo {
+    font-size: 60px;
+  }
+  .login {
+    max-width: 80%;
+    }
+  .pageName {
+    font-size: 15px;
+  }
+  .pageDes,.description {
+    font-size: 11px;
+  }
+  label {
+    font-size: 13px;
+  }
+  input[type="email"],
+input[type="password"] {
+    font-size: 11px;
+    }
+   input[type="submit"],#signup_btn {
+       font-size: 12px;
+   }
+}
+
+/*@media (max-width: 639px) {
+  .logo {
+    font-size: 50px;
+  }
+  .pageName {
+    font-size: 8px;
+  }
+  .pageDes {
+    font-size: 6px;
+  }
+  label {
+    font-size: 13px;
+  }
+  input[type="email"],
+input[type="password"] {
+    font-size: 11px;
+    }
+   input[type="submit"],#signup_btn {
+       font-size: 12px;
+   }
+}*/

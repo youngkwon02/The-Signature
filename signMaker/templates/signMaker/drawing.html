@@ -1,0 +1,384 @@
+{% extends 'theSignature/base.html' %}
+{% block title%} :: 서명 연습하기 :: {% endblock %}
+{% block content %}
+<style>
+.pageName {
+    font-size: 15px;
+    text-align: center;
+    float: left;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgb(231, 219, 208);
+    padding: 15px 20px;
+    margin: 30px 50px;
+    font-weight: bold;
+}
+
+.signPrac {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.canvas {
+    left: 370px;
+    width: 600px;
+    height: 400px;
+    background-color: transparent;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.controls {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls__colors {
+    margin-left: 130px;
+}
+
+.rangeDes1,
+.rangeDes2 {
+    font-size: 13px;
+    margin-right: 8px;
+    margin-bottom: 5px;
+}
+
+.rangeDes2 {
+    margin-right: 33px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    background-color: rgb(114, 171, 240);
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.controls__btns {
+    margin-left: 130px;
+}
+
+#jsSave {
+    background-color: rgb(99, 93, 93);
+    color: rgb(243, 243, 243);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    border: none;
+    border-radius: 12px;
+    /* margin: auto;  */
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#jsMode,
+#jsReset {
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    margin-top: 3px;
+    font-size: 10px;
+    padding: 8px 10px;
+    background-color: rgb(179, 174, 174);
+    color: rgb(27, 27, 27);
+}
+
+.controls .controls__colors {
+    display: flex;
+}
+
+.controls .controls__ranges {
+    display: flex;
+}
+
+.controls__colors .controls__color {
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin: 3px;
+    color: #242424;
+}
+
+@media (max-width: 1600px) {
+    .canvas {
+        left: 370px;
+    }
+}
+@media (max-width: 1300px) {
+    .canvas {
+        left: 330px;
+    }
+}
+
+@media (max-width: 1120px) {
+    .canvas {
+        left: 180px;
+    }
+}
+
+@media (max-width: 900px) {
+    .canvas {
+        left: 150px;
+    }
+}
+
+@media (max-width: 855px) {
+    .canvas {
+        left: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ipad */
+    .canvas {
+        left: 120px;
+    }
+}
+
+@media (max-width: 740px) {
+    .canvas {
+        left: 80px;
+    }
+}
+
+@media (max-width: 639px) {
+    .canvas {
+        left: 70px;
+    }
+}
+
+@media (max-width: 590px) {
+    .canvas {
+        left: 40px;
+    }
+}
+</style>
+
+<div class="pageName">
+            서명 연습하기 >>
+</div><br/><br/><br/><br/><br/><br/>
+    <div class='signPrac' style="position: relative;">
+        <div class="controls__canvas">
+            <canvas id="jsCanvas1" class="canvas" style="position: absolute; z-index: 1;" width="600" height="400"></canvas>
+            <canvas id="jsCanvas2" class="canvas" style="position: absolute; z-index: 2;" width="600" height="400"></canvas>
+            <canvas id="jsCanvas3" class="canvas" style="position: absolute; z-index: 3;" width="600" height="400"></canvas>
+
+        </div>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <div class="controls">
+            <div class="controls__ranges">
+                <div class="rangeDes1 controls__range">
+                    이미지 투명도
+                </div>
+                <div class="controls__range">
+                    <input type="range" id="jsRangeTran" min="0.0" max="1.0" value="0.0" step="0.01" style="position: absolute;" />
+
+                </div>
+            </div>
+            <div class="controls__ranges">
+                <div class="rangeDes2 controls__range">
+                    펜 두께감
+                </div>
+                <div class="controls__range">
+                    <input class="controls__range" type="range" id="jsRange" min="0.1" max="7.0" value="3.0" step="0.1" style="position: absolute;" />
+
+                </div>
+            </div>
+            <br/>
+            <div class="controls__colors" id="jsColors">
+                <div class="controls__color jsColor" style="background-color: #000000"></div>
+                <div class="controls__color jsColor" style="background-color: #242424"></div>
+                <div class="controls__color jsColor" style="background-color: #444444"></div>
+                <div class="controls__color jsColor" style="background-color: #727272"></div>
+                <div class="controls__color jsColor" style="background-color: #a1a1a1"></div>
+                <div class="controls__color jsColor" style="background-color: #d4d4d4"></div>
+                <div class="controls__color jsColor" style="background-color: #ffffff"></div>
+
+            </div>
+
+            <div class="controls__btns">
+                <button id="jsMode">Erase</button>
+                <button id="jsReset">Reset</button>
+            </div>
+            <div class="controls__btns">
+                <button id="jsSave">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="repImageSrc" style="display: none;">{{ alpha_path }}</div>
+<script>
+const INITIAL_COLOR = "black";
+var CANVAS_WIDTH = 600;
+var CANVAS_HEIGHT = 400;
+
+var layer1 = document.getElementById("jsCanvas1");
+var ctx1 = layer1.getContext("2d");
+var layer2 = document.getElementById("jsCanvas2");
+var ctx2 = layer2.getContext("2d");
+var layer3 = document.getElementById("jsCanvas3");
+var ctx3 = layer3.getContext("2d");
+
+const range = document.getElementById("jsRange");
+const TranRange = document.getElementById("jsRangeTran");
+
+const colors = document.getElementsByClassName("jsColor");
+const mode = document.getElementById("jsMode");
+const save = document.getElementById("jsSave");
+const reset = document.getElementById("jsReset");
+
+const sign_img = document.getElementById("sign-img");
+
+var signImg = new Image();
+
+signImg.src = document.querySelector('.repImageSrc').innerHTML;
+
+ctx1.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+signImg.onload = function() {
+    var scale = (Math.min(signImg.width / layer1.width, signImg.height / layer1.height)) * 1.5;
+    var newX = (layer1.width - layer1.width * scale) / 2
+    var newY = (layer1.height - layer1.height * scale) / 2
+    ctx1.drawImage(signImg, newX, newY, layer1.width * scale, layer1.height * scale);
+// <!--    ctx1.drawImage(signImg, 0, 0, signImg.width, signImg.height, 0, 0, layer1.width, layer1.height);-->
+
+}
+ctx2.fillStyle = "rgba(255,255,255,0.0)";
+ctx2.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+ctx3.fillStyle = "rgba(0,0,0,0)";
+ctx3.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+ctx3.strokeStyle = INITIAL_COLOR;
+ctx3.fillStyle = INITIAL_COLOR;
+ctx3.lineWidth = 1.5;
+
+let painting = false;
+let eraser = true;
+
+function stopPainting() {
+    painting = false;
+}
+
+function startPainting() {
+    painting = true;
+}
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+    };
+}
+
+function onMouseMove(event) {
+
+    const x = getMousePos(layer3, event).x
+    const y = getMousePos(layer3, event).y
+    if (!painting) {
+        // console.log("현 위치 감지 : ", x, y);
+        ctx3.beginPath();
+        ctx3.moveTo(x, y);
+    } else {
+        // console.log("현 위치부터 라인그리기 ", x, y);
+        ctx3.lineTo(x, y);
+        ctx3.stroke();
+    }
+}
+
+function handleColorClick(event) {
+    const color = event.target.style.backgroundColor;
+    ctx3.strokeStyle = color;
+    ctx3.fillStyle = color;
+
+
+}
+
+function handleRangeChange(event) {
+    const size = event.target.value;
+    ctx3.lineWidth = size;
+}
+
+function handleTransparentRangeChange(event) {
+    const transparent = event.target.value;
+    ctx2.clearRect(0, 0, layer2.width, layer2.height);
+    ctx2.fillStyle = "rgba(255,255,255," + transparent + ")";
+    ctx2.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+}
+
+function handleModeClick() {
+    console.log(eraser);
+    if (eraser === true) {
+        eraser = false;
+        ctx3.globalCompositeOperation = "destination-out";
+
+        mode.innerText = "Draw";
+    } else {
+        eraser = true;
+        ctx3.globalCompositeOperation = "source-over";
+        ctx3.strokeStyle = 'black';
+        ctx3.fillStyle = 'black';
+        mode.innerText = "Erase";
+    }
+}
+
+function handleSaveClick() {
+
+    const image = layer3.toDataURL();
+
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "my Sign";
+    link.click();
+}
+
+
+
+function handleResetClick() {
+    ctx3.clearRect(0, 0, layer3.width, layer3.height);
+}
+
+function handleCM(event) {
+    event.preventDefault();
+}
+Array.from(colors).forEach(color =>
+    color.addEventListener("click", handleColorClick)
+);
+if (layer3) {
+    layer3.addEventListener("mousemove", onMouseMove);
+    layer3.addEventListener("mousedown", startPainting);
+    layer3.addEventListener("mouseup", stopPainting);
+    layer3.addEventListener("mouseleave", stopPainting);
+    layer3.addEventListener("contextmenu", handleCM);
+}
+
+if (range) {
+    range.addEventListener("input", handleRangeChange);
+}
+
+if (TranRange) {
+    TranRange.addEventListener("input", handleTransparentRangeChange);
+}
+
+if (save) {
+    save.addEventListener("click", handleSaveClick);
+}
+if (reset) {
+    reset.addEventListener("click", handleResetClick);
+}
+if (mode) {
+    mode.addEventListener("click", handleModeClick);
+}
+
+</script>
+
+
+{% endblock %}

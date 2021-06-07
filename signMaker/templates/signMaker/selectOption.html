@@ -1,0 +1,581 @@
+{% extends 'theSignature/base.html' %}
+{% block title%} :: 나만의 서명 제작하기 :: {% endblock %}
+{% block content %}
+
+
+<style>
+.makeSign {
+    text-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: #f1efef;
+    max-width: 60vw;
+    margin-left: 120px;
+    margin-bottom: 60px;
+    box-shadow: 5px 2px 10px rgb(216, 216, 216);
+    padding: 70px 70px 50px 70px;
+    font-size: 16px;
+    left: 50%;
+}
+
+.board {
+    font-size: 20px;
+    background-color: #f1efef;
+    font-weight: bold;
+}
+
+.makeSignField,
+.desc,
+#styleSelect,
+#showLetter,
+.radiotype, #colorSelect,label {
+    background-color: #f1efef;
+}
+
+.desc {
+    font-weight: bold;
+}
+
+.desc2 {
+    background-color: #f1efef;
+    font-size: 14px;
+    color: #757272;
+}
+
+.example {
+    text-align: left;
+    background-color: #f1efef;
+    font-size: 10px;
+}
+
+input[type="text"] {
+    border: none;
+  border-radius: 5px;
+}
+input[type="color"] {
+margin: .4rem;
+}
+
+
+@keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-moz-keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-webkit-keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-o-keyframes loading-text-opacity {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+.loading-container,
+.loading,
+#loading-text {
+    left: 200px;
+    height: 160px;
+    position: relative;
+    /* top: 130px; */
+    width: 160px;
+    border-radius: 100%;
+}
+
+.loading-container {
+    margin: 40px auto
+}
+
+.loading {
+    border: 4px solid transparent;
+    border-color: transparent rgb(180, 149, 149) transparent rgb(180, 149, 149);
+    -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -o-transform-origin: 50% 50%;
+    -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -webkit-transform-origin: 50% 50%;
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+    transform-origin: 50% 50%;
+}
+
+.loading-container:hover .loading {
+    border-color: transparent #463e3d transparent #463e3d;
+}
+
+.loading-container:hover .loading,
+.loading-container .loading {
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+#loading-text {
+    -moz-animation: loading-text-opacity 2s linear 0s infinite normal;
+    -o-animation: loading-text-opacity 2s linear 0s infinite normal;
+    -webkit-animation: loading-text-opacity 2s linear 0s infinite normal;
+    animation: loading-text-opacity 2s linear 0s infinite normal;
+    color: #8a4e4e;
+    font-family: "Helvetica Neue", "Helvetica", "arial";
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 45px;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    /* left: 100px; */
+    /* top: 0; */
+    /* top: 155px; */
+    width: 160px;
+}
+
+</style>
+<script>
+function nameCheck() {
+
+    var name = document.getElementById('name-input').value;
+    var nameLength = 0;
+    var nameArr = [];
+
+    for (i = 0; i < name.length; i++) {
+        if ((name.charCodeAt(i) >= 65 && name.charCodeAt(i) <= 90) || (name.charCodeAt(i) >= 97 && name.charCodeAt(i) <= 122) ) {
+            nameArr[nameLength] = name[i];
+            nameLength++;
+        }
+    }
+
+    if (nameLength == 0) {
+        alert('유효한 이름을 입력해주세요.');
+    } else {
+        var stylefield = document.getElementById('styleSelect');
+        var letterfield = document.getElementById('letterSelect');
+        var colorfield = document.getElementById('colorSelect');
+
+        var line1 = document.getElementById('line1');
+        var line2 = document.getElementById('line2');
+        var line3 = document.getElementById('line3');
+
+        $("#nameinputbtn").attr("disabled", "disabled");
+        $("#nameinputbtn").css("backgroundColor", "#868383");
+        stylefield.style.display = 'inline';
+        letterfield.style.display = 'inline';
+        colorfield.style.display = 'inline';
+
+        line1.style.display = 'inline';
+        line2.style.display = 'inline';
+        line3.style.display = 'inline';
+
+        document.getElementById('makeSignbtn').style.setProperty('display', 'inline');
+
+
+    }
+
+}
+
+
+function delList() {
+    var letterfield = document.getElementById('letterSelect');
+    if (letterfield.style.display == 'inline') {
+        // console.log('already open');
+        $("#nameinputbtn").removeAttr("disabled");
+        $("#nameinputbtn").css("backgroundColor", "#a39a86");
+
+        document.getElementById('styleSelect').style.setProperty('display', 'none');
+        document.getElementById('line1').style.setProperty('display', 'none');
+        document.getElementById('line2').style.setProperty('display', 'none');
+
+        document.getElementById('letterSelect').style.setProperty('display', 'none');
+        document.getElementById('colorSelect').style.setProperty('display', 'none');
+
+        document.getElementById('makeSignbtn').style.setProperty('display', 'none');
+
+        if ($('input[name="chk-style"]').is(":checked")) {
+            $('input[name="chk-style"]').attr('checked', false);
+        }
+
+
+    }
+
+
+}
+
+function sendFormReq(path, params, method='get') {
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = path;
+
+        for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = key;
+            hiddenField.value = params[key];
+            form.appendChild(hiddenField);
+        }
+        }
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+function makeSign() {
+
+    const style = 'input[name="chk-style"]:checked';
+    const selectedStyle = document.querySelectorAll(style);
+
+    let styles = [];
+    var i = 0;
+    selectedStyle.forEach((el) => {
+        styles[i] = el.value;
+        i++;
+    });
+
+    const isCapitalRadio = document.getElementsByName('chk-capital');
+    var isCapital = ''
+    isCapitalRadio.forEach((node) => {
+        if(node.checked)  {
+        isCapital = node.value;
+        }
+      })
+
+    var nameArr = getName();
+    var name = "";
+    for(var i=0; i<nameArr.length; i++) {
+        if (i == 0 && isCapital == 'Yes')
+        {
+            name += nameArr[i].toUpperCase();
+        }
+        else
+        {
+        name += nameArr[i];
+        }
+    }
+
+
+    var signColor = document.getElementById("signColor").value;
+
+
+    console.log(name);
+    console.log(styles);
+    console.log(isCapital);
+    console.log(signColor);
+    var makeSign = document.getElementsByClassName('makeSign');
+    for (var i = 0; i < makeSign.length; i += 1) {
+        // elems[i].style.display = 'block';
+        makeSign[i].style.display = 'none';
+
+    }
+        document.getElementById('loading-screen').style.setProperty('display', 'inline');
+
+    // Pass the choices to backend
+    path = "./passOptions/"
+    param = {
+        "name": name,
+        "options": styles,
+        "color": signColor,
+        "isCapital": isCapital
+    }
+    sendFormReq(path, param, "get");
+}
+
+function getName() {
+    var name = document.getElementById('name-input').value;
+    var nameLength = 0;
+    var nameArr = [];
+
+    for (i = 0; i < name.length; i++) {
+        if ((name.charCodeAt(i) >= 65 && name.charCodeAt(i) <= 90) || (name.charCodeAt(i) >= 97 && name.charCodeAt(i) <= 122) ) {
+            nameArr[nameLength] = name[i].toLowerCase();
+            nameLength++;
+        }
+    }
+
+    return nameArr;
+}
+</script>
+
+<div class="pageName">
+            서명 만들기 >>
+        </div><br/><br/><br/><br/><br/><br/>
+
+        <div class=" makeSign">
+            <div class="board">
+                조건 선택
+            </div><br/><br/>
+
+            <div class="nameEnter makeSignField">
+                <div class="desc">
+                    서명 제작을 원하는 글자(영문)를 입력해주세요.
+                </div><br/>
+                <input type="text" id="name-input" onkeydown="delList()">
+            </div>
+            <br/>
+            <button class="btn" id="nameinputbtn" style="background-color: #a39a86; color: rgb(243, 236, 231); cursor: pointer;" onclick="nameCheck()">조건 선택하기</button>
+
+            <div class="split" id='line1' style="display: none">
+                <br/><br/><br/>
+                <hr>
+            </div>
+
+            <div id="styleSelect" style="display: none">
+                <br/>
+                <div class="desc">
+                    원하는 스타일을 선택해주세요.
+                </div><br/>
+                <div class="desc2">
+<!--                    A에서 선택한 스타일을 바탕으로, B와 C의 선택이 누적됩니다.<br> A에서 둘 다 선택할 경우, 둘 중 하나가 반영된 서명이 제작됩니다.<br>-->
+                    Long은 길쭉하게, Flat은 납작한 형태로 제작됩니다.
+                    <br>
+<!--                    <div class='example'>-->
+<!--                        예 1) Roundy & Long & Legible & Illegible => Roundy & Long & Legible & Illegible<br> 예 2) Roundy & Pointy & Long => Roundy & Long || Pointy & Long<br>-->
+<!--                    </div>-->
+                </div>
+                <br/>
+                <input type="checkbox" name="chk-style" value='long'> Long
+                <br/>
+                <input type="checkbox" name="chk-style" value='flat'> Flat
+                <br/>
+<!--                <br/> A.-->
+<!--                <input type="checkbox" name="chk-style" value='round'> Roundy-->
+<!--                &lt;!&ndash; <font size=3 title='둥글둥글해요'>둥근둥근</font> &ndash;&gt;-->
+<!--                <input type="checkbox" name="chk-style" value='pointy'> Pointy-->
+<!--                <br/> B.-->
+<!--                <input type="checkbox" name="chk-style" value='long'> Long-->
+<!--                <input type="checkbox" name="chk-style" value='flat'> Flat-->
+<!--                <br/> C.-->
+<!--                <input type="checkbox" name="chk-style" value='legible'> Legible-->
+<!--                <input type="checkbox" name="chk-style" value='illegible'> Illegible-->
+            </div>
+
+            <div class="split" id='line2' style="display: none">
+                <br/><br/>
+                <hr>
+            </div>
+            <br/>
+            <div id="letterSelect" style="display: none">
+                <div class="desc">
+                    첫 번째 글자 강조 (대문자 표기) 여부를 선택해주세요.
+                </div><br/>
+<!--                <div id='showLetter'>-->
+<!--                </div>-->
+<!--                <br/>-->
+                <div class="radiotype">
+                <input type="radio" name="chk-capital" value='Yes' checked> Yes
+                <br/>
+                <input type="radio" name="chk-capital" value='No'> No
+                <br/>
+                    </div>
+            </div>
+            <div class="split" id='line3' style="display: none">
+                <br/><br/>
+                <hr>
+            </div>
+            <br/>
+            <div id="colorSelect" style="display: none">
+                <div class="desc">
+                    서명 색상을 선택해주세요.
+                </div><br/>
+                <input type="color" id="signColor" name="signColor" value="#000000">
+<!--                    <label for="signColor">서명 색상</label>-->
+                <br/><br/>
+            </div>
+
+            <br/>
+            <button class="btn" id="makeSignbtn" style="background-color: #a39a86; color: rgb(243, 236, 231); cursor: pointer; display: none;" onclick="makeSign()" >서명 만들기</button>
+
+        </div>
+
+    <div class="loading-container " id='loading-screen' style="display: none; ">
+            <div class="loading "></div>
+            <div id="loading-text " style="left: 100px; ">
+                <!-- Your Signature<br> in Progress -->
+            </div>
+        </div>
+
+
+{% endblock %}

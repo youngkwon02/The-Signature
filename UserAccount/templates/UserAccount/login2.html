@@ -1,0 +1,17 @@
+{% extends "UserAccount/base.html" %}
+
+{% block content %}
+    <div class="container_ctr">
+        <h2>Log in</h2>
+        <span style="color: red; font-weight: bold;">{{ request.session.err_message }}</span>
+        <hr>
+        <form method="POST" action="{%url 'login_action'%}">
+            {% csrf_token %}
+            <label for="user_email">User Email</label><br>
+            <input name="user_email" type="email"><br><br>
+            <label for="password">Password</label><br>
+            <input name="user_passwd" type="password"><br><br>
+            <input type="submit" class="btn btn-primary" value="로그인">
+        </form>
+    <div class="container_ctr">
+{% endblock %}

@@ -1,0 +1,82 @@
+
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static './css/signup.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+    <script src="{% static './js/signup.js' %}" type="text/javascript"></script>
+
+
+
+    <title>The Signature - Join</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        The Signature
+    </div>
+</header>
+<div class="join">
+    <div class="pageName">
+        회원 가입
+    </div>
+    <div class = "errormsg">
+        <span >{{ request.session.err_message }}</span><br>
+    </div>
+    <form method="POST" action="{%url 'signup_action'%}">
+        {% csrf_token %}
+        <div class="korName nameDiv joinField">
+            <label for="first_name_kr">성명 (한글)</label><br>
+            <input name="first_name_kr" type="text" placeholder="홍" required>
+            <input name="last_name_kr" type="text" placeholder="길동" required>
+
+        </div><br>
+
+        <div class="engName nameDiv joinField">
+            <label for="first_name_en">성명 (영문)</label> <br>
+            <input name="first_name_en" type="text" placeholder="Hong" required>
+            <input name="last_name_en" type="text" placeholder="Gildong" required>
+
+        </div><br>
+        <div class="userEmail joinField">
+            <label for="user_email">이메일 (아이디)</label><br>
+            <div id="emailSet">
+                <input id="emailInput" name="user_email" type="email" onkeyup="emailWrite()" placeholder="sign@gmail.com" required>
+                <div id="emailCheck" style = "background-color: #a39a86; color: rgb(243, 236, 231);" onclick="fillEmailCheckResult()">중복조회</div>
+            </div>
+            <div id="checkResult" class="decription"></div>
+        </div>
+        <div class="userPassword ">
+            <div class="pw1 joinField">
+                <label for="password">비밀번호</label>
+                <div class="decription">6글자 이상. 영문 & 숫자 & 특수기호 포함</div><br>
+                <input name="user_passwd" type="password" id="pw1" onkeyup="fillPwCheckResult()" placeholder="비밀번호 입력" required>
+                &nbsp;&nbsp;<br><span id="lenCheck" class="decription"></span>
+            </div>
+            <div class="pw2 joinField">
+                <label for="password_check">비밀번호 확인</label><br>
+            <input name="user_passwd_check" type="password" id="pw2" onkeyup="fillPwCheckResult()" placeholder="비밀번호 재입력" required>
+            &nbsp;&nbsp;<br><span id="pwCheck" class="decription"></span>
+            </div>
+
+        </div><br>
+
+        <div class="submitBtn">
+            <input type="submit" class="btn btn-primary joinBtn" id='joinBtn' disabled="disabled" style="background-color: #c7c7c2;" value="가입하기">
+        </div>
+    </form>
+</div>
+
+<!-- <footer>
+    <p>Make your own signature</p>
+  </footer> -->
+</body>
+</html>
+
+
+{% endblock %}

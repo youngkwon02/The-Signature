@@ -1,0 +1,471 @@
+{% extends 'theSignature/base.html' %}
+{% block title%} :: 워터마크 적용하기 :: {% endblock %}
+{% block content %}
+
+<style>
+.watermark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.imgUpload {
+    left:580px;
+    background-color: #cfcfcb;
+    color: rgb(58, 57, 57);
+    padding: 12px 12px;
+    border: none;
+    border-radius: 12px;
+    margin: auto;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.imgUpload:hover {
+    background-color: #50504f;
+    color: rgb(187, 184, 184);
+}
+
+.canvas {
+    /* margin-left: 40px;
+    margin-bottom: 10px; */
+    left: 330px;
+    width: 600px;
+    height: 400px;
+    background-color: transparent;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.controls {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    background-color: rgb(114, 171, 240);
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.controls__btns {
+    margin-left: 130px;
+}
+
+#jsSave {
+    background-color: rgb(99, 93, 93);
+    color: rgb(243, 243, 243);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    border: none;
+    border-radius: 12px;
+    /* margin: auto;  */
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#jsMode,
+#jsReset {
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    margin-top: 3px;
+    font-size: 10px;
+    padding: 8px 10px;
+    background-color: rgb(179, 174, 174);
+    color: rgb(27, 27, 27);
+}
+
+.controls .controls__colors {
+    display: flex;
+    margin-left:130px;
+}
+
+.controls__colors .controls__color {
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin: 3px;
+    color: #242424;
+}
+
+.controls__imgs {
+    /* display: flex; */
+    margin: 3px;
+    font-size: 10px;
+    padding: 2px;
+    /* align-items: center; */
+    margin-left: 130px;
+    margin-bottom: 5px;
+}
+
+.sign_img {
+    margin-left: 40px;
+    margin-top: 5px;
+    border-radius: 20px;
+    box-shadow: 3px 2px 3px rgb(240, 239, 239);
+}
+
+@media (max-width: 1600px) {
+    .canvas {
+        left: 370px;
+    }
+    .imgUpload {
+    left:610px;
+    }
+}
+@media (max-width: 1300px) {
+    .canvas {
+        left: 330px;
+    }
+    .imgUpload {
+    left:510px;
+    }
+}
+
+@media (max-width: 1120px) {
+    .canvas {
+        left: 180px;
+    }
+    .imgUpload {
+    left:420px;
+    }
+}
+
+@media (max-width: 900px) {
+    .canvas {
+        left: 150px;
+    }
+    .imgUpload {
+    left:400px;
+    }
+}
+
+@media (max-width: 855px) {
+    .canvas {
+        left: 140px;
+    }
+    .imgUpload {
+    left:380px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ipad */
+    .canvas {
+        left: 120px;
+    }
+    .imgUpload {
+    left:340px;
+    }
+}
+
+@media (max-width: 740px) {
+    .canvas {
+        left: 80px;
+    }
+    .imgUpload {
+    left:290px;
+    }
+}
+
+@media (max-width: 639px) {
+    .canvas {
+        left: 70px;
+    }
+}
+
+@media (max-width: 590px) {
+    .canvas {
+        left: 40px;
+    }
+}
+</style>
+<div class="pageName">
+            워터마크 적용하기 >>
+        </div><br/><br/><br/><br/><br/><br/>
+        <div class='watermark' style="position: relative;">
+        <form method="post" action="./uploadAction/" >
+            {% csrf_token %}
+            <p><input type="file" accept="image/*" name="image" id="file" onchange="loadImage(event)" style="display: none;"></p>
+            <p><label for="file" class='imgUpload' style="cursor: pointer; position: absolute;">이미지 업로드</label></p>
+            <br/><br/>
+            <div class="controls__canvas">
+                <canvas id="jsCanvas1" class="canvas" style="position: absolute; z-index: 1;" width="600" height="400"></canvas>
+                <canvas id="jsCanvas2" class="canvas" style="position: absolute; z-index: 2;" width="600" height="400"></canvas>
+                <canvas id="jsCanvas3" class="canvas" style="position: absolute; z-index: 3;" width="600" height="400"></canvas>
+            </div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div class="controls">
+                <div class="controls__range">
+                    <input type="range" id="jsRange" min="0.1" max="7.0" value="3.0" step="0.1" style="position: absolute;" />
+                </div>
+                <br/>
+                <div class="controls__colors" id="jsColors">
+                    <div class="controls__color jsColor" style="background-color: #000000"></div>
+                    <div class="controls__color jsColor" style="background-color: #242424"></div>
+                    <div class="controls__color jsColor" style="background-color: #444444"></div>
+                    <div class="controls__color jsColor" style="background-color: #727272"></div>
+                    <div class="controls__color jsColor" style="background-color: #a1a1a1"></div>
+                    <div class="controls__color jsColor" style="background-color: #d4d4d4"></div>
+                    <div class="controls__color jsColor" style="background-color: #ffffff"></div>
+
+                </div>
+
+                <div class="controls__btns">
+                    <button id="jsMode">Erase</button>
+                    <button id="jsReset">Reset</button>
+                </div>
+                <div class="controls__imgs">
+                    <div class="controls_img">
+                        <img class="sign_img" id="sign-img" src="{{ alpha_path }}" alt="" loading="lazy" width="120px"><br>
+                    </div>
+                    <div class="controls_img">
+                        <input type="radio" name="img-location" id="no-img" value="no-img" checked="checked">
+                        <label for="no-img"> None </label>
+                        <input type="radio" name="img-location" id="left-top" value="left-top">
+                        <label for="left-top">Left-Top</label>
+
+                        <input type="radio" name="img-location" id="left-bottom" value="left-bottom">
+                        <label for="left-bottom">Left-Bottom</label>
+                    </div>
+
+                    <div class="controls_img">
+
+                        <input type="radio" name="img-location" id="right-top" value="right-top">
+                        <label for="right-top">Right Top</label>
+
+                        <input type="radio" name="img-location" id="right-bottom" value="right-bottom">
+                        <label for="right-bottom">Right Bottom</label>
+
+                        <input type="radio" name="img-location" id="center" value="center">
+                        <label for="center">Center</label>
+                    </div>
+                </div>
+                <input type="hidden" name="savedImg" id="savedImg">
+                <div class="controls__btns">
+                    <button id="jsSave" type="submit" onclick="watermarkSave()">Save</button>
+                </div>
+            </div>
+        </form>
+        </div>
+<script>
+const INITIAL_COLOR = "black";
+var CANVAS_WIDTH = 600;
+var CANVAS_HEIGHT = 400;
+
+var layer1 = document.getElementById("jsCanvas1");
+var ctx1 = layer1.getContext("2d");
+var layer2 = document.getElementById("jsCanvas2");
+var ctx2 = layer2.getContext("2d");
+var layer3 = document.getElementById("jsCanvas3");
+var ctx3 = layer3.getContext("2d");
+
+const range = document.getElementById("jsRange");
+const colors = document.getElementsByClassName("jsColor");
+const mode = document.getElementById("jsMode");
+const save = document.getElementById("jsSave");
+const reset = document.getElementById("jsReset");
+
+var imgLoc = document.querySelectorAll('input[type="radio"][name="img-location"]');
+const sign_img = document.getElementById("sign-img");
+
+var bgImg = new Image();
+var signImg = new Image();
+
+var xPoint = 0;
+var yPoint = 0;
+var imgHeight = CANVAS_HEIGHT;
+var imgWidth = CANVAS_WIDTH;
+
+ctx1.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+signImg.src = sign_img.src;
+ctx3.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+
+bgImg.onload = function() {
+
+    ctx1.drawImage(bgImg, 0, 0, bgImg.width, bgImg.height, 0, 0, layer1.width, layer1.height);
+
+}
+
+
+var loadImage = function(event) {
+    bgImg = new Image();
+    bgImg.src = URL.createObjectURL(event.target.files[0]);
+    bgImg.crossOrigin = "Anonymous";
+
+    bgImg.onload = function() {
+        ctx1.fillStyle = "white";
+        ctx2.fillStyle = "rgba(0,0,0,0)";
+
+        ctx1.fillRect(0, 0, layer1.width, layer1.height);
+
+        // get the scale
+        var scale = Math.min(layer1.width / bgImg.width, layer1.height / bgImg.height);
+        // get the top left position of the image
+        var x = (layer1.width / 2) - (bgImg.width / 2) * scale;
+        var y = (layer1.height / 2) - (bgImg.height / 2) * scale;
+
+        xPoint = x;
+        yPoint = y;
+        imgWidth = bgImg.width * scale;
+        imgHeight = bgImg.height * scale;
+
+
+        ctx1.drawImage(bgImg, x, y, bgImg.width * scale, bgImg.height * scale);
+
+    }
+}
+
+ctx3.fillStyle = "rgba(0,0,0,0)";
+ctx3.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+ctx3.strokeStyle = INITIAL_COLOR;
+ctx3.fillStyle = INITIAL_COLOR;
+ctx3.lineWidth = 1.5;
+
+let painting = false;
+let eraser = true;
+
+function stopPainting() {
+    painting = false;
+}
+
+function startPainting() {
+    painting = true;
+}
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+    };
+}
+
+function onMouseMove(event) {
+
+    const x = getMousePos(layer3, event).x
+    const y = getMousePos(layer3, event).y
+    if (!painting) {
+        // console.log("현 위치 감지 : ", x, y);
+        ctx3.beginPath();
+        ctx3.moveTo(x, y);
+    } else {
+        // console.log("현 위치부터 라인그리기 ", x, y);
+        ctx3.lineTo(x, y);
+        ctx3.stroke();
+    }
+}
+
+function handleColorClick(event) {
+    const color = event.target.style.backgroundColor;
+    ctx3.strokeStyle = color;
+    ctx3.fillStyle = color;
+
+
+}
+
+function handleRangeChange(event) {
+    const size = event.target.value;
+    ctx3.lineWidth = size;
+}
+
+function handleModeClick() {
+    console.log(eraser);
+    if (eraser === true) {
+        eraser = false;
+        ctx3.globalCompositeOperation = "destination-out";
+
+        mode.innerText = "Draw";
+    } else {
+        eraser = true;
+        ctx3.globalCompositeOperation = "source-over";
+        ctx3.strokeStyle = 'black';
+        ctx3.fillStyle = 'black';
+        mode.innerText = "Erase";
+    }
+}
+
+function handleSaveClick() {
+    ctx1.drawImage(layer2, 0, 0);
+    ctx1.drawImage(layer3, 0, 0);
+
+    const image = layer1.toDataURL();
+
+// <!--   save @ django -->
+    document.getElementById('savedImg').value = layer1.toDataURL('myImage/png');
+
+// <!--    save @ local -->
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "myImage";
+    link.click();
+}
+
+
+
+function handleResetClick() {
+    ctx2.clearRect(0, 0, layer2.width, layer2.height);
+    ctx3.clearRect(0, 0, layer3.width, layer3.height);
+}
+
+
+function handleImgLocation(value) {
+    // console.log(value);
+
+    ctx2.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    if (value == 'no-img') {} else if (value == 'left-top') {
+        ctx2.drawImage(signImg, 0, 0, signImg.width * 8, signImg.height * 8, xPoint + 5, yPoint + 5, layer2.width, layer2.height);
+    } else if (value == 'left-bottom') {
+        ctx2.drawImage(signImg, 0, 0, signImg.width * 8, signImg.height * 8, xPoint + 5, imgHeight - 60, layer2.width, layer2.height);
+    } else if (value == 'right-top') {
+        ctx2.drawImage(signImg, 0, 0, signImg.width * 8, signImg.height * 8, xPoint + imgWidth - 90, yPoint + 5, layer2.width, layer2.height);
+    } else if (value == 'right-bottom') {
+        ctx2.drawImage(signImg, 0, 0, signImg.width * 8, signImg.height * 8, xPoint + imgWidth - 90, imgHeight - 60, layer2.width, layer2.height);
+    } else if (value == 'center') {
+        ctx2.drawImage(signImg, 0, 0, signImg.width * 8, signImg.height * 8, xPoint + (imgWidth / 2) - 50, yPoint + (imgHeight / 2) - 30, layer2.width, layer2.height);
+    }
+}
+
+// 마우스 우클릭 방지
+function handleCM(event) {
+    event.preventDefault();
+}
+Array.from(colors).forEach(color =>
+    color.addEventListener("click", handleColorClick)
+);
+if (layer3) {
+    layer3.addEventListener("mousemove", onMouseMove);
+    layer3.addEventListener("mousedown", startPainting);
+    layer3.addEventListener("mouseup", stopPainting);
+    layer3.addEventListener("mouseleave", stopPainting);
+    layer3.addEventListener("contextmenu", handleCM);
+}
+
+if (range) {
+    range.addEventListener("input", handleRangeChange);
+}
+if (save) {
+    save.addEventListener("click", handleSaveClick);
+}
+if (reset) {
+    reset.addEventListener("click", handleResetClick);
+}
+if (mode) {
+    mode.addEventListener("click", handleModeClick);
+}
+imgLoc.forEach(radio => radio.addEventListener('change', () => handleImgLocation(radio.value)));
+
+</script>
+
+{% endblock %}

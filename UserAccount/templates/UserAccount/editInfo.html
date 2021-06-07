@@ -1,0 +1,364 @@
+{% extends 'theSignature/base.html' %}
+{% block title%} :: 내 정보 수정하기 :: {% endblock %}
+{% block content %}
+<style>
+
+
+.editInfo {
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #f1efef;
+  max-width: 60vw;
+  /*margin: 25px 30px;*/
+  margin-left: 120px;
+  margin-bottom: 60px;
+  box-shadow: 5px 2px 10px rgb(216, 216, 216);
+  padding: 70px 70px 50px 70px;
+  font-size: 16px;
+  /*position: absolute;*/
+  left: 50%;
+  /* transform: translateX(-50%);*/
+}
+.board {
+  font-size: 20px;
+  background-color: #f1efef;
+  font-weight: bold;
+}
+.editField {
+  background-color: #f1efef;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  /* width: 100%; */
+  padding: 5px;
+  border: 1px solid rgb(105, 104, 102);
+  border-radius: 4px;
+  resize: vertical;
+  background-color: rgb(245, 242, 240);
+  font-family: "Noto Serif KR", serif;
+  font-size: 13px;
+  width: 40%;
+}
+input[type="email"] {
+  border: none;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 60%;
+}
+
+input[type="submit"],
+.btn {
+  background-color: #c7c7c2;
+  color: white;
+  padding: 8px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: center;
+  margin: auto;
+  width: 35%;
+
+  font-size: 12px;
+  font-family: "Noto Serif KR", serif;
+}
+
+.cancelBtn {
+  width: 20%;
+}
+
+label {
+  font-size: 15px;
+  padding: 3px 3px 3px 0;
+  display: inline-block;
+  margin-right: 10px;
+  background-color: #f1efef;
+}
+
+form, #pwChecking, .decription {
+  background-color: #f1efef;
+}
+
+.decription {
+  font-size: 0.8vw;
+  /* padding: 8px 8px 8px 0; */
+  display: inline-block;
+  color: rgb(134, 132, 131);
+}
+
+
+@media (max-width: 1023px) {
+  .editInfo {
+    margin-left: 120px;
+    max-width: 60vw;
+  }
+}
+
+@media (max-width: 639px) {
+  .editInfo {
+    margin-left: 40px;
+    max-width: 80vw;
+  }
+}
+
+</style>
+
+<script>
+
+function get_firstname_kr() {
+  var result = false;
+  $.ajax({
+      url: 'getFirstnameKr/',
+      type: 'GET',
+      async: false,
+      data: {},
+      success: function(data) {
+        result = data
+      }
+  })
+  return result;
+}
+
+function get_lastname_kr() {
+  var result = false;
+  $.ajax({
+      url: 'getLastnameKr/',
+      type: 'GET',
+      async: false,
+      data: {},
+      success: function(data) {
+        result = data;
+      }
+  })
+  return result;
+}
+
+function get_firstname_en() {
+  var result = false;
+  $.ajax({
+      url: 'getFirstnameEn/',
+      type: 'GET',
+      async: false,
+      data: {},
+      success: function(data) {
+        result = data;
+      }
+  })
+  return result;
+}
+
+function get_lastname_en() {
+  var result = false;
+  $.ajax({
+      url: 'getLastnameEn/',
+      type: 'GET',
+      async: false,
+      data: {},
+      success: function(data) {
+        result = data;
+      }
+  })
+  return result;
+}
+
+function fillNameBlank() {
+  var firstname_kr = get_firstname_kr();
+  var lastname_kr = get_lastname_kr();
+  var firstname_en = get_firstname_en();
+  var lastname_en = get_lastname_en();
+  document.querySelector('#firstname_kr').value = firstname_kr;
+  document.querySelector('#lastname_kr').value = lastname_kr;
+  document.querySelector('#firstname_en').value = firstname_en;
+  document.querySelector('#lastname_en').value = lastname_en;
+}
+
+function pwCheckDefine() {
+    var request_email = document.querySelector("#email_address").value;
+    var request_pw = document.querySelector("#pwCheck_1").value;
+    let returnValue = false; //이미 존재하면 false를 리턴.
+    $.ajax({
+        url: 'pwCheck/',
+        type: 'GET',
+        async: false,
+        data: {'request_email': request_email, 'request_pw': request_pw},
+        success: function(data) {
+            if(data === 'Correct') {
+                returnValue = true;
+            } else {
+                returnValue = false;
+            }
+        }
+    })
+    return returnValue;
+}
+
+function UserpwCheck() {
+    let result_holder = document.querySelector('#user_pw');
+
+    if(pwCheckDefine() === true) {
+        fillNameBlank();
+        $("#pwChecking").css("display", "none");
+        $("#showEditField").css("display", "inline");
+        document.getElementById('user_pw').innerHTML='';
+    } else {
+        document.getElementById('user_pw').innerHTML='비밀번호를 올바르게 입력해주세요.';
+        document.getElementById('pwCheck_1').innerHTML='';
+        document.getElementById('user_pw').style.color='#f8756c';
+    }
+}
+
+
+function pwCheck(){
+    var pw = document.getElementById('pw1').value;
+    var pattern1 = /[0-9]/;
+    var pattern2 = /[a-zA-Z]/;
+    var pattern3 = /[~!@\#$%<>^&*]/;
+    if (!pattern1.test(pw)||!pattern2.test(pw)||!pattern3.test(pw)||pw.length < 6) {
+        inactiveJoin();
+        return '비밀번호 조건을 만족해주세요.';
+    } else{
+        document.getElementById('lenCheck').innerHTML='';
+        if (document.getElementById('pw2').value!=''){
+            if(document.getElementById('pw1').value==document.getElementById('pw2').value) {
+                
+                activeJoin();
+                return '비밀번호가 일치합니다.';
+            }
+            else {
+                inactiveJoin();
+                return '비밀번호가 일치하지 않습니다.';
+            }
+        }
+    }
+}
+
+function fillPwCheckResult() {
+    if (pwCheck() === '비밀번호 조건을 만족해주세요.') {
+        document.getElementById('lenCheck').innerHTML='비밀번호 조건을 만족해주세요.';
+        document.getElementById('pwCheck').innerHTML='';
+        document.getElementById('lenCheck').style.color='#f8756c';
+        inactiveJoin();
+    } else{
+        document.getElementById('lenCheck').innerHTML='';
+
+        if (document.getElementById('pw2').value!=''){
+            if(document.getElementById('pw1').value==document.getElementById('pw2').value) {
+                document.getElementById('pwCheck').innerHTML='비밀번호가 일치합니다.';
+                document.getElementById('pwCheck').style.color='#6ca4f8';
+
+                activeJoin();
+            }
+            else {
+                document.getElementById('pwCheck').innerHTML='비밀번호가 일치하지 않습니다.';
+                document.getElementById('pwCheck').style.color='#f8756c';
+                console.log("Inactive");
+                inactiveJoin();
+            }
+        }
+    }
+}
+
+function inactiveJoin(){
+    $("#editBtn").prop("disabled", true);
+    $("#editBtn").css("background-color", "#c7c7c2");
+    $("#editBtn").css("color", "white");
+}
+
+function activeJoin(){
+    $("#editBtn").prop("disabled", false);
+    $("#editBtn").css("background-color", "#6b6351");
+
+
+    const element = document.querySelector("#editBtn");
+    element.addEventListener("mouseover", event => {
+        // console.log("Mouse in");
+        $("#editBtn").css("background-color", "#a39a86");
+        $("#editBtn").css("color", "white");
+
+        });
+
+        element.addEventListener("mouseout", event => {
+        // console.log("Mouse out");
+        $("#editBtn").css("background-color", "#6b6351");
+        $("#editBtn").css("color", "black");
+
+        });
+}
+
+</script>
+
+
+<div>
+    <div class="pageName">
+    내 정보 수정하기 >>
+    </div><br/><br/><br/><br/><br/><br/>
+
+    <div class="editInfo">
+      <div class="board">
+        회원 정보 변경하기
+      </div><br/><br/>
+        <div class="userEmail editField">
+          <label for="user_email">email</label>
+          <input name="user_email" type="email" id="email_address" value="{{ request.session.user_email }}" disabled="disabled">
+        </div><br/>
+        <div id="pwChecking">
+        <div class="pw editField">
+          <label for="password ">비밀번호</label>
+      <input name="user_password" type="password" id="pwCheck_1" placeholder="비밀번호 입력" required>
+      &nbsp;&nbsp;<br><span id="user_pw" class="decription"></span>
+      </div>
+      <div class="btn" style = "background-color: #a39a86; color: rgb(243, 236, 231);" onclick="UserpwCheck()">
+          정보 변경하기
+      </div>
+      <br/>
+        </div>
+      <form id ="showEditField" method="POST" action="apply/" style="display: none;">
+        {% csrf_token %}
+        <div class="changeInfo editField">
+      <div class="split" id='line'><hr></div>
+      <br/>
+          <div class="korName nameDiv editField">
+            <label for="first_name_kr">성명 (한글)</label><br>
+            <input id="firstname_kr" name="first_name_kr" type="text" value="홍" required>
+            <input id="lastname_kr" name="last_name_kr" type="text" value="길동" required>
+
+        </div><br>
+
+        <div class="engName nameDiv editField">
+            <label for="first_name_en">성명 (영문)</label> <br>
+            <input id="firstname_en" name="first_name_en" type="text" value="Hong" required>
+            <input id="lastname_en" name="last_name_en" type="text" value="Gildong" required>
+
+        </div><br>
+
+        <div class="userPassword ">
+            <div class="pw1 editField">
+                <label for="password">비밀번호</label>
+                <div class="decription editField">6글자 이상. 영문 & 숫자 & 특수기호 포함</div><br>
+                <input name="user_passwd" type="password" id="pw1" onchange="pwCheck()" placeholder="비밀번호 입력" required>
+                &nbsp;&nbsp;<br><span id="lenCheck" class="decription"></span>
+            </div>
+            <div class="pw2 editField">
+                <label for="password_check">비밀번호 확인</label><br>
+            <input name="user_passwd_check" type="password" id="pw2" onchange="pwCheck()" placeholder="비밀번호 재입력" required>
+            &nbsp;&nbsp;<br><span id="pwCheck" class="decription"></span>
+            </div>
+
+        </div><br>
+
+        <div class="editField">
+            <input type="submit" class="submitBtn btn" id='editBtn' disabled="disabled" value="회원정보 수정"></div><br/>
+<!--            <div class="cancelBtn btn" style = "background-color: #a39a86; color: rgb(243, 236, 231);" >취소</div>-->
+        </div>
+
+    </form>
+
+    </div>
+</div>
+
+{% endblock %}

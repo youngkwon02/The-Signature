@@ -1,3 +1,6 @@
+# NOT USED FOR THE PROJECT
+# BUT IT HAS WORKED FOR THE RESULT IMG SIMILARITY
+
 import cv2, numpy as np
 import matplotlib.pylab as plt
 

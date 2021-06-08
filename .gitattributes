@@ -1,9 +1,0 @@
-1/* filter=lfs diff=lfs merge=lfs -text
-12/* filter=lfs diff=lfs merge=lfs -text
-17/* filter=lfs diff=lfs merge=lfs -text
-18/* filter=lfs diff=lfs merge=lfs -text
-20/* filter=lfs diff=lfs merge=lfs -text
-21/* filter=lfs diff=lfs merge=lfs -text
-5/* filter=lfs diff=lfs merge=lfs -text
-6/* filter=lfs diff=lfs merge=lfs -text
-8/* filter=lfs diff=lfs merge=lfs -text

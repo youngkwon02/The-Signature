@@ -15,7 +15,7 @@ from .text import message
 
 import sys
 sys.path.insert(
-    1, '/Users/1102k/Desktop/workspace/TheSignature-Web/signMaker/')
+    1, './signMaker/')
 from signMaker.models import preservedResult
 
 

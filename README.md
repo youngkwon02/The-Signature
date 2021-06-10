@@ -89,6 +89,6 @@ localhost:8000
 ```
 
 ---
-## 🌸 Thanks for
+## 🌸 Thanks to
 - Prof: Sangoh Park (Chung-Ang Univ)<br>
 - Mentor: Jiman Kim (Samsung research)

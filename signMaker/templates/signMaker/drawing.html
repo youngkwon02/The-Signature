@@ -71,7 +71,6 @@ input[type=range]::-webkit-slider-runnable-track {
     margin-top: 3px;
     border: none;
     border-radius: 12px;
-    /* margin: auto;  */
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
@@ -215,10 +214,13 @@ input[type=range]::-webkit-slider-runnable-track {
         </div>
     </div>
     <div class="repImageSrc" style="display: none;">{{ alpha_path }}</div>
+
 <script>
 const INITIAL_COLOR = "black";
 var CANVAS_WIDTH = 600;
 var CANVAS_HEIGHT = 400;
+let painting = false;
+let eraser = true;
 
 var layer1 = document.getElementById("jsCanvas1");
 var ctx1 = layer1.getContext("2d");
@@ -229,16 +231,13 @@ var ctx3 = layer3.getContext("2d");
 
 const range = document.getElementById("jsRange");
 const TranRange = document.getElementById("jsRangeTran");
-
 const colors = document.getElementsByClassName("jsColor");
 const mode = document.getElementById("jsMode");
 const save = document.getElementById("jsSave");
 const reset = document.getElementById("jsReset");
-
 const sign_img = document.getElementById("sign-img");
 
 var signImg = new Image();
-
 signImg.src = document.querySelector('.repImageSrc').innerHTML;
 
 ctx1.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -248,7 +247,6 @@ signImg.onload = function() {
     var newX = (layer1.width - layer1.width * scale) / 2
     var newY = (layer1.height - layer1.height * scale) / 2
     ctx1.drawImage(signImg, newX, newY, layer1.width * scale, layer1.height * scale);
-// <!--    ctx1.drawImage(signImg, 0, 0, signImg.width, signImg.height, 0, 0, layer1.width, layer1.height);-->
 
 }
 ctx2.fillStyle = "rgba(255,255,255,0.0)";
@@ -258,9 +256,6 @@ ctx3.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 ctx3.strokeStyle = INITIAL_COLOR;
 ctx3.fillStyle = INITIAL_COLOR;
 ctx3.lineWidth = 1.5;
-
-let painting = false;
-let eraser = true;
 
 function stopPainting() {
     painting = false;

@@ -4,7 +4,6 @@
 <style>
     .pageName {
     font-size: 15px;
-    /* align-items: left; */
     text-align: center;
     float: left;
     box-sizing: border-box;
@@ -13,8 +12,6 @@
     padding: 15px 20px;
     margin: 30px 50px;
     font-weight: bold;
-    /* max-width: 50vw; */
-    /* left: 5%; */
 }
 
 .my-signs,
@@ -23,7 +20,6 @@
     text-align: center;
     margin-left: 50px;
     align-items: center;
-    /* border-color: black; */
 }
 
 label {
@@ -39,7 +35,6 @@ label {
     display: flex;
     align-items: center;
     flex-direction: row;
-    /* width: 80%; */
     flex-wrap: wrap;
 }
 
@@ -63,7 +58,6 @@ label {
     box-sizing: border-box;
     border-radius: 20px;
     width: 300px;
-    /* height: 210px; */
     margin: 10px;
 }
 
@@ -89,8 +83,6 @@ a {
     flex-direction: row;
     border-radius: 20px;
     margin-left: 25px;
-    /* width: 80%; */
-    /* flex-wrap: wrap; */
 }
 
 .btns2 {
@@ -100,8 +92,6 @@ a {
     flex-direction: row;
     border-radius: 20px;
     margin-left: 70px;
-    /* width: 80%; */
-    /* flex-wrap: wrap; */
 }
 
 .signBtn {
@@ -223,9 +213,6 @@ function makeRepresent(imgSrc){
                         <label for="representative">대표 서명</label><br>
                         <img src="{{ rep_sign }}" style="margin-top:5px; margin-bottom:8px;" name="representative" alt="" loading="lazy" width="300px">
                         <div class="saveBtn" style="margin-left: 135px; font-size: 14px;" onclick="downloadImg('{{ rep_sign }}','sign')">저장</div>
-<!--                        <a href='{{ rep_sign }}' download="signature">-->
-<!--                            <div class="saveBtn" style="margin-left: 135px; font-size: 14px;">저장</div>-->
-<!--                        </a>-->
                     </div>
                 </div>
                 <br>
@@ -237,45 +224,10 @@ function makeRepresent(imgSrc){
                         <div class="btns1">
                             <div class="saveBtn signBtn" onclick="makeRepresent('{{ sign }}')">대표 설정</div>
                             <div class="saveBtn signBtn" onclick="downloadImg('{{ sign }}','sign')">저장</div>
-
-<!--                            <a class="signBtn" href='{{ sign }}' download="signature">-->
-<!--                                <div class="saveBtn signBtn">저장</div>-->
-<!--                            </a>-->
                             <div class="saveBtn signBtn" onclick="deleteFile('{{ sign }}')">삭제</div>
                         </div>
                     </div>
                     {% endfor %}
-<!--                    <div class="signImg2">-->
-<!--                        <img class="img2" src="img/sign.png" style="margin-bottom:8px" alt="" loading="lazy" width="250px">-->
-<!--                        <div class="btns1">-->
-<!--                            <div class="saveBtn signBtn">대표 설정</div>-->
-<!--                            <a class="signBtn" href='img/sign.png' download="signature">-->
-<!--                                <div class="saveBtn signBtn">저장</div>-->
-<!--                            </a>-->
-<!--                            <div class="saveBtn signBtn">삭제</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="signImg2">-->
-<!--                        <img class="img2" src="img/sign.png" style="margin-bottom:8px" alt="" loading="lazy" width="250px">-->
-<!--                        <div class="btns1">-->
-<!--                            <div class="saveBtn signBtn">대표 설정</div>-->
-<!--                            <a class="signBtn" href='img/sign.png' download="signature">-->
-<!--                                <div class="saveBtn signBtn">저장</div>-->
-<!--                            </a>-->
-<!--                            <div class="saveBtn signBtn">삭제</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="signImg2">-->
-<!--                        <img class="img2" src="img/sign.png" style="margin-bottom:8px" alt="" loading="lazy" width="250px">-->
-<!--                        <div class="btns1">-->
-<!--                            <div class="saveBtn signBtn">대표 설정</div>-->
-<!--                            <a class="signBtn" href='img/sign.png' download="signature">-->
-<!--                                <div class="saveBtn signBtn">저장</div>-->
-<!--                            </a>-->
-<!--                            <div class="saveBtn signBtn">삭제</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
 
                 </div>
             </div>
@@ -289,81 +241,13 @@ function makeRepresent(imgSrc){
                 <div class="myImg" style="width:280px;">
                     <img class="img2" src="{{img.img}}" style="margin-bottom:8px" alt="" loading="lazy" width="230px">
                     <div class="btns2">
-<!--                        <a href='' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
                         <div class="saveBtn signBtn"  onclick="downloadImg('{{ sign }}','my image')">저장</div>
 
                         <div class="saveBtn signBtn">삭제</div>
                     </div>
                 </div>
                 {% endfor %}
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_0295.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_0295.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_8342.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_8342.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_0295.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_0295.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_0295.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_0295.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_0295.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_0295.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_8342.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_8342.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="myImg" style="width:280px;">-->
-<!--                    <img class="img2" src="img/IMG_0295.jpg" style="margin-bottom:8px" alt="" loading="lazy" width="230px">-->
-<!--                    <div class="btns2">-->
-<!--                        <a href='img/IMG_0295.jpg' download="signature">-->
-<!--                            <div class="saveBtn">저장</div>-->
-<!--                        </a>-->
-<!--                        <div class="saveBtn signBtn">삭제</div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
 
         </div>
-
-
 {% endblock %}

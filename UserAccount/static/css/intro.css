@@ -10,7 +10,6 @@ body {
   text-align: center;
   color: black;
   font-family: cursive;
-  /*font-size: 8vw;*/
   font-size: 80px;
 }
 
@@ -30,13 +29,11 @@ body {
   padding: 10px;
   font-family: cursive;
   font-family: "Noto Serif KR", serif;
-  /*font-size: 2vw;*/
   font-size: 20px;
 }
 
 .btn {
   text-decoration: none;
-  /*font-size: 1.8vw;*/
   font-size: 19px;
   color: white;
   padding: 10px 20px 10px 20px;

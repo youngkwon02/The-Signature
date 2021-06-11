@@ -24,7 +24,6 @@ function emailCheck() {
 function fillEmailCheckResult() {
     let result_holder = document.querySelector('#checkResult');
     var request_email = document.querySelector("#emailInput").value;
-//    console.log("printing",request_email);
     if(emailCheck() === false) {
         result_holder.innerHTML = '이미 가입된 이메일입니다.';
         result_holder.style.setProperty('color', '#f8756c');
@@ -115,14 +114,12 @@ function activeJoin(){
 
     const element = document.querySelector("#joinBtn");
     element.addEventListener("mouseover", event => {
-        // console.log("Mouse in");
         $(".joinBtn").css("background-color", "#a39a86");
         $(".joinBtn").css("color", "white");
     
         });
     
         element.addEventListener("mouseout", event => {
-        // console.log("Mouse out");
         $(".joinBtn").css("background-color", "#6b6351");
         $(".joinBtn").css("color", "black");
     
@@ -132,11 +129,3 @@ function activeJoin(){
 function emailWrite(){
     inactiveJoin();
 }
-
-
-//function (){
-//    console.log("hi ",{{ request.session.email_sent }});
-//    if({{ request.session.email_sent }}){
-//    alert({{ request.session.email_sent }});
-//    }
-//}

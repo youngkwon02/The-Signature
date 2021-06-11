@@ -13,7 +13,3 @@ $(document).ready(function(){
 		$(this).toggleClass('open');
 	});
 });
-
-function goTop(){
-	$('html').scrollTop(0);
-}

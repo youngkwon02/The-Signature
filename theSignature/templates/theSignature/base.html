@@ -19,7 +19,6 @@
     </div>
     <div class="navbar">
         <nav id="navId">
-            <!-- <a class="nav-link" href="">Home</a> -->
             <a class="nav-link" href="{% url 'home' %}">나만의 서명 제작하기</a>
             <a class="nav-link" href="{% url 'drawing' %}">서명 연습하기</a>
             <a class="nav-link" href="{% url 'watermark' %}">워터마크 적용하기</a>
@@ -41,14 +40,8 @@
             </div>
         </div>
     </div>
-<!--    <div class="toTop" onclick="goTop()">-->
-<!--        <a class="arrow" href="">-->
-<!--            <span></span>-->
-<!--        </a>-->
-<!--    </div>-->
 <div>
 {% block content %}
-
 {% endblock %}
 
 </div>

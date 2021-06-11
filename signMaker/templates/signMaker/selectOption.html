@@ -193,74 +193,11 @@ margin: .4rem;
         -moz-transform: rotate(360deg);
     }
 }
-
-@keyframes loading-text-opacity {
-    0% {
-        opacity: 0
-    }
-    20% {
-        opacity: 0
-    }
-    50% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0
-    }
-}
-
-@-moz-keyframes loading-text-opacity {
-    0% {
-        opacity: 0
-    }
-    20% {
-        opacity: 0
-    }
-    50% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0
-    }
-}
-
-@-webkit-keyframes loading-text-opacity {
-    0% {
-        opacity: 0
-    }
-    20% {
-        opacity: 0
-    }
-    50% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0
-    }
-}
-
-@-o-keyframes loading-text-opacity {
-    0% {
-        opacity: 0
-    }
-    20% {
-        opacity: 0
-    }
-    50% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0
-    }
-}
-
 .loading-container,
-.loading,
-#loading-text {
+.loading {
     left: 200px;
     height: 160px;
     position: relative;
-    /* top: 130px; */
     width: 160px;
     border-radius: 100%;
 }
@@ -295,25 +232,6 @@ margin: .4rem;
     transition: all 0.5s ease-in-out;
 }
 
-#loading-text {
-    -moz-animation: loading-text-opacity 2s linear 0s infinite normal;
-    -o-animation: loading-text-opacity 2s linear 0s infinite normal;
-    -webkit-animation: loading-text-opacity 2s linear 0s infinite normal;
-    animation: loading-text-opacity 2s linear 0s infinite normal;
-    color: #8a4e4e;
-    font-family: "Helvetica Neue", "Helvetica", "arial";
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 45px;
-    opacity: 0;
-    position: absolute;
-    text-align: center;
-    text-transform: uppercase;
-    /* left: 100px; */
-    /* top: 0; */
-    /* top: 155px; */
-    width: 160px;
-}
 
 </style>
 <script>
@@ -362,7 +280,6 @@ function nameCheck() {
 function delList() {
     var letterfield = document.getElementById('letterSelect');
     if (letterfield.style.display == 'inline') {
-        // console.log('already open');
         $("#nameinputbtn").removeAttr("disabled");
         $("#nameinputbtn").css("backgroundColor", "#a39a86");
 
@@ -439,14 +356,8 @@ function makeSign() {
 
     var signColor = document.getElementById("signColor").value;
 
-
-    console.log(name);
-    console.log(styles);
-    console.log(isCapital);
-    console.log(signColor);
     var makeSign = document.getElementsByClassName('makeSign');
     for (var i = 0; i < makeSign.length; i += 1) {
-        // elems[i].style.display = 'block';
         makeSign[i].style.display = 'none';
 
     }
@@ -508,28 +419,14 @@ function getName() {
                     원하는 스타일을 선택해주세요.
                 </div><br/>
                 <div class="desc2">
-<!--                    A에서 선택한 스타일을 바탕으로, B와 C의 선택이 누적됩니다.<br> A에서 둘 다 선택할 경우, 둘 중 하나가 반영된 서명이 제작됩니다.<br>-->
                     Long은 길쭉하게, Flat은 납작한 형태로 제작됩니다.
                     <br>
-<!--                    <div class='example'>-->
-<!--                        예 1) Roundy & Long & Legible & Illegible => Roundy & Long & Legible & Illegible<br> 예 2) Roundy & Pointy & Long => Roundy & Long || Pointy & Long<br>-->
-<!--                    </div>-->
                 </div>
                 <br/>
                 <input type="checkbox" name="chk-style" value='long'> Long
                 <br/>
                 <input type="checkbox" name="chk-style" value='flat'> Flat
                 <br/>
-<!--                <br/> A.-->
-<!--                <input type="checkbox" name="chk-style" value='round'> Roundy-->
-<!--                &lt;!&ndash; <font size=3 title='둥글둥글해요'>둥근둥근</font> &ndash;&gt;-->
-<!--                <input type="checkbox" name="chk-style" value='pointy'> Pointy-->
-<!--                <br/> B.-->
-<!--                <input type="checkbox" name="chk-style" value='long'> Long-->
-<!--                <input type="checkbox" name="chk-style" value='flat'> Flat-->
-<!--                <br/> C.-->
-<!--                <input type="checkbox" name="chk-style" value='legible'> Legible-->
-<!--                <input type="checkbox" name="chk-style" value='illegible'> Illegible-->
             </div>
 
             <div class="split" id='line2' style="display: none">
@@ -541,9 +438,6 @@ function getName() {
                 <div class="desc">
                     첫 번째 글자 강조 (대문자 표기) 여부를 선택해주세요.
                 </div><br/>
-<!--                <div id='showLetter'>-->
-<!--                </div>-->
-<!--                <br/>-->
                 <div class="radiotype">
                 <input type="radio" name="chk-capital" value='Yes' checked> Yes
                 <br/>
@@ -561,7 +455,6 @@ function getName() {
                     서명 색상을 선택해주세요.
                 </div><br/>
                 <input type="color" id="signColor" name="signColor" value="#000000">
-<!--                    <label for="signColor">서명 색상</label>-->
                 <br/><br/>
             </div>
 
@@ -572,8 +465,6 @@ function getName() {
 
     <div class="loading-container " id='loading-screen' style="display: none; ">
             <div class="loading "></div>
-            <div id="loading-text " style="left: 100px; ">
-                <!-- Your Signature<br> in Progress -->
             </div>
         </div>
 

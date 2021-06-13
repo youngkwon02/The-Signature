@@ -24,8 +24,10 @@ git clone https://github.com/CAU-Celebrity/TheSignature.git
 <br>
 
 2. ML model 다운로드:
+```sh
  >https://drive.google.com/file/d/1NuKK2iPP_IiWUtSYW3npQjOOnqL5OEs-/view 에서 다운로드 후\
  /signMaker/ml_model/ 폴더에 배치
+```
 
 <br>
 

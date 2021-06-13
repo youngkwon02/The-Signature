@@ -21,8 +21,6 @@ import tensorflow as tf
 from unet import UNet
 from utils import compile_frames_to_gif
 
-sys.path.insert(
-    1, '/home/ubuntu/src/TheSignature-Web/signMaker/')
 import applyAlpha
 import addLogo
 

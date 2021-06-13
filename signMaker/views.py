@@ -119,7 +119,7 @@ def passOptions(request):
         "color": color,
         "isCap": is_cap
     }
-    num = random.sample([1, 5, 6, 8, 12, 17, 18, 20, 21], 3)
+    num = random.sample([1, 5, 6, 7, 8, 9, 12, 13, 17, 18, 19, 20, 21, 23], 3)
     run.make_result(data, '01', num[0])
     run.make_result(data, '02', num[1])
     run.make_result(data, '03', num[2])

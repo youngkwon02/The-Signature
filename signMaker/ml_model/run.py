@@ -154,7 +154,7 @@ def make_result(data, sequence, f_index):
     input_name = data.get("name")
     name.append(input_name)
 
-    src_font = './signMaker/ml_model/DancingScript-Regular.ttf'
+    src_font = './signMaker/ml_model/font/DancingScript-Regular.ttf'
     dst_fonts_path = './signMaker/ml_model/font/'
     f = open(dst_fonts_path + "dst_font.txt", 'r')
     dst_fonts =  f.readlines()

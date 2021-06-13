@@ -2,5 +2,5 @@ __pycache__
 */__pycache__
 */.DS_Store
 */db.sqlite3
-signMaker/new_model/model/**
+signMaker/ml_model/model/**
 .DS_Store

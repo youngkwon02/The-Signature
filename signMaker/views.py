@@ -15,7 +15,7 @@ import base64
 import random
 
 sys.path.insert(
-    1, 'signMaker/new_model/')
+    1, 'signMaker/ml_model/')
 import run
 
 secret_file = os.path.realpath('./secrets.json')

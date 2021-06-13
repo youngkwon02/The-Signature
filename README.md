@@ -23,7 +23,13 @@ git clone https://github.com/CAU-Celebrity/TheSignature.git
 
 <br>
 
-2. 가상환경 설치 및 Module 설치:
+2. ML model 다운로드:
+https://drive.google.com/file/d/1NuKK2iPP_IiWUtSYW3npQjOOnqL5OEs-/view 에서 다운로드 후
+/signMaker/new_model/ 폴더에 배치
+
+<br>
+
+3. 가상환경 설치 및 Module 설치:
 ```sh
 pip3 install virtualenv && virtualenv venv
 
@@ -37,7 +43,7 @@ cd TheSignature && pip3 install -r requirement.txt
 
 <br>
 
-2-a. DB 관련 Module 설치:
+3-a. DB 관련 Module 설치:
 ```sh
 (Window & Mac)
 pip3 install mysqlclient
@@ -51,7 +57,7 @@ pip3 install pymysql
 
 <br>
 
-3. MySQL 설치:
+4. MySQL 설치:
 ```sh
 (Windows) Visit the link https://www.mysql.com/downloads/
 (Linux) sudo apt-get install mysql-server && sudo systemctl start mysql
@@ -60,7 +66,7 @@ pip3 install pymysql
 
 <br>
 
-4. Database 기본설정:
+5. Database 기본설정:
 ```sh
 mysql -u root -p (Permission이 필요하면 prefix sudo keyword)
 CREATE USER 'signature-root'@'localhost' IDENTIFIED BY 'thesignature7!';
@@ -72,7 +78,7 @@ exit() (또는 Ctrl + Z)
 
 <br>
 
-5. Model migration:
+6. Model migration:
 ```sh
 python3 manage.py makemigrations
 python3 manage.py migrate

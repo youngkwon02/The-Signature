@@ -23,9 +23,9 @@ git clone https://github.com/CAU-Celebrity/TheSignature.git
 
 <br>
 
-2. ML model 다운로드:
+2. ML model 다운로드: <a href="https://drive.google.com/file/d/1NuKK2iPP_IiWUtSYW3npQjOOnqL5OEs-/view">Download</a>
 ```sh
- https://drive.google.com/file/d/1NuKK2iPP_IiWUtSYW3npQjOOnqL5OEs-/view 에서 다운로드 후
+ 위의 링크에서 모델 파일을 다운로드 후
  /signMaker/ml_model/ 폴더에 배치
 ```
 
@@ -40,7 +40,7 @@ call venv/Scripts/activate   (For Windows)
 
 cd TheSignature && pip3 install -r requirement.txt
 
-(According to your device dependency, you might have to install some additional modules)
+(According to your dependency, you might have to install some additional modules)
 ```
 
 <br>

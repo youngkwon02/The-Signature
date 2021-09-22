@@ -1,6 +1,6 @@
 # 🪄 The Signature
 * Signature production service (WEB * ML)<br>
-* Let us make your novel signature!!
+* Let us make your novel signature!
 ---
 ## 🖥 DEMO Result
 

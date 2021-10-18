@@ -15,9 +15,9 @@
 ## 💫 Contributor
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/youngkwon02"><img src="https://avatars.githubusercontent.com/u/39653584?v=4?s=200" width="200px;" alt=""/><br /><sub><b>Youngkwon Kim</b></sub></a><br />WEB-BE</td>
-    <td align="center"><a href="https://github.com/sohyun123"><img src="https://avatars.githubusercontent.com/u/29995265?v=4?s=200" width="200px;" alt=""/><br /><sub><b>Sohyun Park</b></sub></a><br />WEB-FE</td>
-    <td align="center"><a href="https://github.com/yulaseo"><img src="https://avatars.githubusercontent.com/u/70151461?v=4?s=200" width="200px;" alt=""/><br /><sub><b>Yula Seo</b></sub></a><br />Machine Learning</td>
+    <td align="center"><a href="https://github.com/youngkwon02"><img src="https://avatars.githubusercontent.com/u/39653584?v=4?s=200" width="200px;" alt=""/><br /><sub><b>Youngkwon Kim</b></sub></a><br />Server</td>
+    <td align="center"><a href="https://github.com/sohyun123"><img src="https://avatars.githubusercontent.com/u/29995265?v=4?s=200" width="200px;" alt=""/><br /><sub><b>Sohyun Park</b></sub></a><br />Front-End</td>
+    <td align="center"><a href="https://github.com/yulaseo"><img src="https://avatars.githubusercontent.com/u/70151461?v=4?s=200" width="200px;" alt=""/><br /><sub><b>Yula Seo</b></sub></a><br />ML</td>
   </tr>
 </table>
 

@@ -68,28 +68,8 @@ pip3 install pymysql
 
 <br>
 
-4. MySQL 설치:
-```sh
-(Windows) Visit the link https://www.mysql.com/downloads/
-(Linux) sudo apt-get install mysql-server && sudo systemctl start mysql
-(Mac OS) brew install mysql
-```
 
-<br>
-
-5. Database 기본설정:
-```sh
-mysql -u root -p (Permission이 필요하면 prefix sudo keyword)
-CREATE USER 'signature-root'@'localhost' IDENTIFIED BY 'thesignature7!';
-CREATE DATABASE theSignature;
-GRANT ALL PRIVILEGES ON *.* TO 'signature-root'@'localhost';
-FLUSH PRIVILEGES;
-exit() (또는 Ctrl + Z)
-```
-
-<br>
-
-6. Model migration:
+4. Model migration:
 ```sh
 python3 manage.py makemigrations
 python3 manage.py migrate
@@ -98,7 +78,7 @@ python3 manage.py runserver
 
 <br>
 
-6. 실행 방법:
+5. 실행 방법:
 ```sh
 다음 주소를 브라우저에 복사 및 이동
 
